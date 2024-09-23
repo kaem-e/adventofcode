@@ -1,1 +1,1 @@
-aoc's by year in branches fr
+Advent of code 2022. solutions by day in individual folders fr
