@@ -1,5 +1,3 @@
-#![allow(unused)]
-
 pub mod input;
 
 pub fn part1(input: &str) -> i32 {
@@ -18,22 +16,28 @@ pub fn part1(input: &str) -> i32 {
 		.unwrap()
 }
 
-pub fn part2(input: &str) -> i32 {
-	let mut temp: Vec<i32> = input
+pub fn part2(input: &str) -> u32 {
+	let mut max_nums: [u32; 3] = [u32::MIN; 3];
+	input
 		.trim()
 		.split("\n\n")
-		.map(|chunk| -> i32 {
-			chunk
+		// .inspect(|f| println!("About to sum: \n{f}"))
+		.for_each(|chunk| {
+			let sum = chunk
 				.lines()
-				.map(|line| line.trim().parse::<i32>().unwrap())
-				.sum::<i32>()
-		})
-		.collect::<Vec<i32>>();
+				.map(|line| line.trim().parse::<u32>().unwrap())
+				.sum::<u32>();
+			// println!("Result: {sum}\n");
+			if max_nums[0] <= sum {
+				max_nums[0] = sum;
+				// this feels really inefficient ngl,
+				// thisll have to be called for every element
+				// but atleast its only being done when a new element is added so
+				max_nums.sort();
+			}
+		});
 
-	temp.sort_by(|a, b| b.cmp(a));
-	let sum = temp[0..=2].iter().sum();
-
-	sum
+	max_nums.iter().sum()
 }
 
 fn main() {
