@@ -1,1 +1,1 @@
-aoc's by year in branches fr
+Advent of code 2023, days as individual folders fr
