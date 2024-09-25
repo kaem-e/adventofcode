@@ -1,44 +1,23 @@
 #![allow(unused)]
 
 mod input;
-// mod priority;
 
 fn part1(input: &str) -> u32 {
 	input
 		.lines()
 		.map(|line| -> u32 {
-			println!("{}", &line);
 			let chunk_len = line.len() / 2;
-			let (mut arr_head, mut arr_tail) =
-				(Vec::with_capacity(chunk_len), Vec::with_capacity(chunk_len));
-			let mut char_iterator = line.chars();
+			let (head, tail) = line.split_at(chunk_len);
 
-			for _ in 0..chunk_len {
-				arr_head.push(char_iterator.next().unwrap());
-			}
-			for _ in 0..chunk_len {
-				arr_tail.push(char_iterator.next().unwrap());
-			}
-
-
-			println!("{:?}", &arr_head);
-			println!("{:?}", &arr_tail);
-
-			// rust binary search seems to be utterly stupid
-			arr_head.sort();
-			arr_tail.sort();
-
-			let mut found_char: char = ' ';
 			// there HAS to be a more efficient way of doing this bru
-			for x in arr_head {
-				// println!("{}", &x);
-				found_char = if arr_tail.binary_search(&x).is_ok() {
-					x
-				} else {
-					continue;
-				}
+			let mut found_char: char = ' ';
+			for x in head.chars() {
+				found_char = match tail.find(x) {
+					Some(_) => x,
+					None => continue,
+				};
 			}
-			println!("{}\n", &found_char);
+			// println!("Found: {}\n", &found_char);
 
 			match found_char {
 				'a'..='z' => ((found_char as u8) - b'a') + 1,
