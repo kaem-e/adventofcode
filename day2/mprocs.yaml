@@ -1,0 +1,11 @@
+procs:
+  test:
+    cmd:  ["bacon", "test"]
+  test1:
+    cmd: ["bacon", "test_part1"]
+  test2:
+    cmd: ["bacon", "test_part2"]
+  run:
+    cmd: ["bacon", "run"]
+  clippy:
+    cmd: ["bacon", "clippy"]
