@@ -9,22 +9,15 @@ fn part1(input: &str) -> u32 {
 			let chunk_len = line.len() / 2;
 			let (head, tail) = line.split_at(chunk_len);
 
-			// there HAS to be a more efficient way of doing this bru
-			let mut found_char: char = ' ';
-			for x in head.chars() {
-				found_char = match tail.find(x) {
-					Some(_) => x,
-					None => continue,
-				};
-			}
-			// println!("Found: {}\n", &found_char);
-
-			match found_char {
-				'a'..='z' => ((found_char as u8) - b'a') + 1,
-				'A'..='Z' => ((found_char as u8) - b'A') + 27,
-				x => panic!("tried parsing non_alphanumeric char: {:?}", x),
-			}
-			.into()
+			head
+				.chars()
+				.find(|&x| tail.contains(x))
+				.map(|f| match f {
+					'a'..='z' => (f as u8 - b'a' + 1) as u32,
+					'A'..='Z' => (f as u8 - b'A' + 27) as u32,
+					_ => panic!("tried parsing non-alphanumeric char: {:?}", f),
+				})
+				.unwrap()
 		})
 		.sum::<u32>()
 }
