@@ -1,11 +1,6 @@
-#![allow(unused)]
-
 mod input;
 
-use std::{any::Any, collections::HashSet};
-
-use itertools::Itertools;
-use rayon;
+use std::collections::HashSet;
 
 fn part1(input: &str) -> u32 {
 	input
@@ -28,18 +23,54 @@ fn part1(input: &str) -> u32 {
 }
 
 fn part2(input: &str) -> u32 {
-	input
-		.lines()
-		.chunks(3)
-		.into_iter()
-		.map(|chunk| {
-			chunk
-				.map(|line| line.chars().collect::<HashSet<_>>())
-				.reduce(|a, b| a.intersection(&b).cloned().collect())
-				.filter(|hs| !hs.is_empty())
-		})
-		.count() as u32
+	let mut input = input.lines();
+	let mut intersection: char = ' ';
+	let mut sum: u32 = 0;
+
+	let mut compute_closure = || -> Option<char> {
+		let line1: HashSet<char> = HashSet::from_iter(input.next()?.chars());
+		let line2: HashSet<char> =
+			HashSet::from_iter(input.next().unwrap().chars());
+		let line3: HashSet<char> =
+			HashSet::from_iter(input.next().unwrap().chars());
+		intersection = line1
+			// this inefficient as fuck fr
+			.intersection(&line2)
+			.cloned()
+			.collect::<HashSet<char>>()
+			.intersection(&line3)
+			.cloned()
+			.collect::<HashSet<char>>()
+			.iter()
+			.next()
+			.unwrap()
+			.to_owned();
+		Some(intersection)
+	};
+
+	while let Some(a) = compute_closure() {
+		sum += match a {
+			'a'..='z' => (a as u8 - b'a' + 1) as u32,
+			'A'..='Z' => (a as u8 - b'A' + 27) as u32,
+			_ => panic!("tried parsing non-alphanumeric char: {:?}", a),
+		};
+	}
+
+	sum
 }
+// fn part2(input: &str) -> u32 {
+// 	input
+// 		.lines()
+// 		.chunks(3)
+// 		.into_iter()
+// 		.map(|chunk| {
+// 			chunk
+// 				.map(|line| line.chars().collect::<HashSet<_>>())
+// 				.reduce(|a, b| a.intersection(&b).cloned().collect())
+// 				.filter(|hs| !hs.is_empty())
+// 		})
+// 		.count() as u32
+// }
 
 fn main() {
 	println!("Part 1 Answer: {:?}", part1(input::INPUT.trim()));
