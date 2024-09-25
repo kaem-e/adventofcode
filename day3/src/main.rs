@@ -2,6 +2,11 @@
 
 mod input;
 
+use std::{any::Any, collections::HashSet};
+
+use itertools::Itertools;
+use rayon;
+
 fn part1(input: &str) -> u32 {
 	input
 		.lines()
@@ -23,7 +28,17 @@ fn part1(input: &str) -> u32 {
 }
 
 fn part2(input: &str) -> u32 {
-	todo!()
+	input
+		.lines()
+		.chunks(3)
+		.into_iter()
+		.map(|chunk| {
+			chunk
+				.map(|line| line.chars().collect::<HashSet<_>>())
+				.reduce(|a, b| a.intersection(&b).cloned().collect())
+				.filter(|hs| !hs.is_empty())
+		})
+		.count() as u32
 }
 
 fn main() {
@@ -63,7 +78,7 @@ ttgJtRGJQctTZtZT
 CrZsJsPPZsGzwwsLwLmpwMDw"
 					.trim()
 			),
-			0
+			70
 		)
 	}
 }
