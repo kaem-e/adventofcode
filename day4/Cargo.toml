@@ -1,0 +1,8 @@
+[package]
+name    = "day4"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+itertools = { version = "0.13.*", features = ["use_std"] }
+rayon     = "1.10.*"
