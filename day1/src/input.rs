@@ -1,5 +1,4 @@
 pub mod inputs {
-	// usually they have two different inputs but we in this case they didnt idk
 	pub const INPUT_PART1: &str = "2832
 2108
 3082
