@@ -1,3 +1,4 @@
+#![allow(unused)]
 mod input;
 
 fn part1(input: &str) -> u32 {
@@ -10,7 +11,7 @@ fn part2(input: &str) -> u32 {
 
 fn main() {
 	println!("Part 1 Answer: {:?}", part1(input::INPUT));
-	println!("Part 1 Answer: {:?}", part2(input::INPUT));
+	println!("Part 2 Answer: {:?}", part2(input::INPUT));
 }
 
 #[cfg(test)]

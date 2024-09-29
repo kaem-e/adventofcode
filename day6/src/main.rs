@@ -13,13 +13,17 @@ fn part1(input: &str) -> usize {
 		.unwrap() + 4
 }
 
-fn part2(input: &str) -> u32 {
-	todo!()
+fn part2(input: &str) -> usize {
+	input
+		.as_bytes()
+		.windows(14)
+		.position(|window| window.iter().collect::<HashSet<_>>().len() == 14)
+		.unwrap() + 14
 }
 
 fn main() {
 	println!("Part 1 Answer: {:?}", part1(input::INPUT));
-	println!("Part 1 Answer: {:?}", part2(input::INPUT));
+	println!("Part 2 Answer: {:?}", part2(input::INPUT));
 }
 
 #[cfg(test)]
@@ -37,6 +41,10 @@ pub mod tests {
 
 	#[test]
 	fn part2_test() {
-		assert_eq!(part2(""), 0)
+		assert_eq!(part2("mjqjpqmgbljsphdztnvjfqwrcgsmlb"), 19);
+		assert_eq!(part2("bvwbjplbgvbhsrlpgdmjqwftvncz"), 23);
+		assert_eq!(part2("nppdvjthqldpwncqszvftbrmjlhg"), 23);
+		assert_eq!(part2("nznrnfrfntjfmvfwmzdfjlvtqnbhcprsg"), 29);
+		assert_eq!(part2("zcfzfwzzqfrljwzlrfnpqdbhtmscgvjw"), 26);
 	}
 }
