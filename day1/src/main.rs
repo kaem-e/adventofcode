@@ -2,16 +2,13 @@ pub mod input;
 
 pub fn part1(input: &str) -> i32 {
 	input
-		.trim()
 		.split("\n\n")
 		.map(|chunk| -> i32 {
 			chunk
 				.lines()
-				.map(|line| line.trim().parse::<i32>().unwrap())
-				// .inspect(|f| println!("parsed: {:?}", f))
+				.map(|line| line.parse::<i32>().unwrap())
 				.sum::<i32>()
 		})
-		// .inspect(|f| println!("Chunk sum: {:?}\n\n", f))
 		.max()
 		.unwrap()
 }
