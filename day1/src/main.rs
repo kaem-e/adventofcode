@@ -1,6 +1,6 @@
 pub mod input;
 
-pub fn part1(input: &str) -> i32 {
+fn part1(input: &str) -> i32 {
 	input
 		.split("\n\n")
 		.map(|chunk| -> i32 {
@@ -13,7 +13,7 @@ pub fn part1(input: &str) -> i32 {
 		.unwrap()
 }
 
-pub fn part2(input: &str) -> u32 {
+fn part2(input: &str) -> u32 {
 	let mut max_nums: [u32; 3] = [u32::MIN; 3];
 	input
 		.trim()
