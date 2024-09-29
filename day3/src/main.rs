@@ -28,11 +28,12 @@ fn part2(input: &str) -> u32 {
 	let mut sum: u32 = 0;
 
 	let mut compute_closure = || -> Option<char> {
+			// this inefficient as fuck fr
 		let line1: HashSet<char> = HashSet::from_iter(input.next()?.chars());
 		let line2: HashSet<char> = HashSet::from_iter(input.next()?.chars());
 		let line3: HashSet<char> = HashSet::from_iter(input.next()?.chars());
 		intersection = line1
-			// this inefficient as fuck fr
+			// this truly inefficient as fuck fr
 			.intersection(&line2)
 			.cloned()
 			.collect::<HashSet<char>>()
@@ -98,3 +99,6 @@ CrZsJsPPZsGzwwsLwLmpwMDw"
 		)
 	}
 }
+
+
+// ngl i dont like this solution its so janky
