@@ -7,7 +7,7 @@ pub fn part2(input: &str) -> u32 {
 }
 
 fn main() {
-	println!("Part 1 Answer: {:?}", part1::call(input::INPUT));
+	println!("Part 1 Answer: {:?}", part1::main(input::INPUT));
 	println!("Part 1 Answer: {:?}", part2(input::INPUT));
 }
 

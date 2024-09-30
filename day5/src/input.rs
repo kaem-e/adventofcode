@@ -512,3 +512,28 @@ move 5 from 1 to 2
 move 6 from 3 to 7
 move 5 from 4 to 8
 ";
+
+// #[cfg(test)]
+// mod tests {
+// 	#[test]
+// 	fn testlogic() {
+// 		fn skd(line: &str) -> String {
+// 			line
+// 				.replace("] [", "")
+// 				.replace("[", "")
+// 				.replace("]", "")
+// 				// this is cheating tbh but im just so done with this problem for now
+// 				.replace("    ", ".")
+// 				.replace(" ", "")
+// 				.replace(".", " ")
+// 		};
+// 		assert_eq!(skd("[H]                 [Z]         [J]"), "H    Z  J");
+// 		assert_eq!(skd("[L]     [W] [B]     [G]         [R]"), "L WB G  R");
+// 		assert_eq!(skd("[R]     [G] [S]     [J] [H]     [Q]"), "R GS JH Q");
+// 		assert_eq!(skd("[F]     [N] [T] [J] [P] [R]     [F]"), "F NTJPR F");
+// 		assert_eq!(skd("[B]     [C] [M] [R] [Q] [F] [G] [P]"), "B CMRQFGP");
+// 		assert_eq!(skd("[C] [D] [F] [D] [D] [D] [T] [M] [G]"), "CDFDDDTMG");
+// 		assert_eq!(skd("[J] [C] [J] [J] [C] [L] [Z] [V] [B]"), "JCJJCLZVB");
+// 		assert_eq!(skd("[M] [Z] [H] [P] [N] [W] [P] [L] [C]"), "MZHPNWPLC");
+// 	}
+// }
