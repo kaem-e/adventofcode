@@ -1,6 +1,7 @@
 #![allow(unused)]
 mod input;
 mod part1;
+mod part2;
 
 pub fn part2(input: &str) -> u32 {
 	todo!()
@@ -8,15 +9,6 @@ pub fn part2(input: &str) -> u32 {
 
 fn main() {
 	println!("Part 1 Answer: {:?}", part1::main(input::INPUT));
-	println!("Part 1 Answer: {:?}", part2(input::INPUT));
+	println!("Part 2 Answer: {:?}", part2::main(input::INPUT));
 }
 
-#[cfg(test)]
-pub mod tests {
-	use super::*;
-
-	#[test]
-	fn part2_test() {
-		assert_eq!(part2(""), 0)
-	}
-}

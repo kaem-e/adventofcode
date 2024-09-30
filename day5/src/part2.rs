@@ -48,7 +48,7 @@ impl Stack {
 				.replace("    ", ".")
 				.replace(" ", "")
 				.replace(".", " ");
-			// println!("\n\n\n start: ;{line}; end");
+			// println!("\nstart: ;{line}; end");
 
 			let temp = line.char_indices().filter_map(|(x, y)| {
 				if y.is_alphabetic() {
@@ -59,19 +59,19 @@ impl Stack {
 			});
 
 			for (index, char) in temp {
-				// println!("\npushing: {char} at index: {index}");
+				// println!("pushing: {char} at index: {index}");
 				if let Some(internalvec) = parentvec.get_mut(index) {
 					internalvec.push(char);
 				} else {
 					// skip colums that already exist
 					let len = parentvec.len();
-					// println!(" vec has up to index: {}", ((len as i8) - 1));
+					// println!("\tvec has up to index: {}", ((len as i8) - 1));
 					for x in 0..=index {
 						if len <= x {
-							// println!("\tcreating new vec at index: {x}");
+							// println!("\t\tcreating new vec at index: {x}");
 							parentvec.push(Vec::new());
 						} else {
-							// println!("\tskipping creating new vec at index: {x}, already exists");
+							// println!("\t\tskipping creating new vec at index: {x}, already exists");
 						}
 					}
 					parentvec.get_mut(index).unwrap().push(char);
@@ -90,6 +90,11 @@ impl Stack {
 	/// method on any stack that takes in commands as an argument
 	/// where commands are a iterator type `Lines`
 	fn sort(mut self, mut commands: std::str::Lines) -> Self {
+		println!("\n\n\nStarted sorting: ");
+		self.0.iter().for_each(|alfjsdk| println!("\t{:?}", alfjsdk));
+		println!("\n");
+
+
 		for command in commands {
 			// destruct everything
 			let (_move, ammount, _from, from, _to, to) =
@@ -97,16 +102,23 @@ impl Stack {
 			let ammount = (ammount.parse::<usize>().unwrap());
 			let from = (from.parse::<usize>().unwrap() - 1);
 			let to = (to.parse::<usize>().unwrap() - 1);
-			// println!("{:?}", (_move, ammount, _from, from, _to, to));
+			println!("{:?}", (_move, ammount, _from, from, _to, to));
 
 			// rearrange the vector
 			// thisll reverse the direction but thats how the parser instructs it be done so
+			// fucking knew this would be the variation that would happen i just fucking knew it
+			// this is a easy enough modification, done only to this bottom bit, rest of the solutions same as p1
+			let mut cranehand: Vec<char> = Vec::new();
 			for x in 0..ammount {
 				let from = self.0.get_mut(from).unwrap();
 				let from_char = from.pop().unwrap();
-				let to = self.0.get_mut(to).unwrap();
-				to.push(from_char);
+				cranehand.push(from_char);
 			}
+			// this is the total difference lol
+			cranehand.reverse();
+			let to = self.0.get_mut(to).unwrap();
+			to.extend_from_slice(&cranehand);
+			self.0.iter().for_each(|alfjsdk| println!("\t{:?}", alfjsdk));
 		}
 		self
 	}
@@ -139,7 +151,7 @@ pub mod tests {
 	use super::*;
 
 	#[test]
-	fn part1_test() {
+	fn part2_test() {
 		assert_eq!(
 			main(
 				"    [D]    
@@ -152,7 +164,7 @@ move 3 from 1 to 3
 move 2 from 2 to 1
 move 1 from 1 to 2"
 			),
-			"CMZ"
+			"MCD"
 		)
 	}
 }
