@@ -1,5 +1,3 @@
-#![allow(unused)]
-
 mod input;
 mod types;
 use types::{rps, NeededResult};
