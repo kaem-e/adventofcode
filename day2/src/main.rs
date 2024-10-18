@@ -1,6 +1,6 @@
 mod input;
 mod types;
-use types::{rps, NeededResult};
+use types::{NeededResult, PlayerChoice};
 
 fn part1(input: &str) -> u32 {
 	input
@@ -9,25 +9,22 @@ fn part1(input: &str) -> u32 {
 		.map(|lines| {
 			let mut battle = lines.split(" ");
 
-			let opponent = match battle.next().unwrap() {
-				"A" => rps::Rock,
-				"B" => rps::Paper,
-				"C" => rps::Sissors,
-				_ => panic!("something fucked up idk"),
-			};
-
-			let player = match battle.next().unwrap() {
-				"X" => rps::Rock,
-				"Y" => rps::Paper,
-				"Z" => rps::Sissors,
-				_ => panic!("something fucked up idk"),
-			};
+			let opponent = battle
+				.next()
+				.unwrap()
+				.parse::<PlayerChoice>()
+				.expect("screwed up while parsing");
+			let player = battle
+				.next()
+				.unwrap()
+				.parse::<PlayerChoice>()
+				.expect("screwed up while parsing");
 
 			player.find_score(&opponent)
 		})
-		// .inspect(|f| {
-		// 	println!("{:?}", f);
-		// })
+		.inspect(|f| {
+			println!("{:?}", f);
+		})
 		.sum()
 }
 
@@ -38,19 +35,16 @@ fn part2(input: &str) -> u32 {
 		.map(|lines| {
 			let mut battle = lines.split(" ");
 
-			let opponent = match battle.next().unwrap() {
-				"A" => rps::Rock,
-				"B" => rps::Paper,
-				"C" => rps::Sissors,
-				_ => panic!("something fucked up idk"),
-			};
-
-			let player = match battle.next().unwrap() {
-				"X" => NeededResult::Lose,
-				"Y" => NeededResult::Draw,
-				"Z" => NeededResult::Win,
-				_ => panic!("something fucked up idk"),
-			};
+			let opponent = battle
+				.next()
+				.unwrap()
+				.parse::<PlayerChoice>()
+				.expect("screwed up while parsing");
+			let player = battle
+				.next()
+				.unwrap()
+				.parse::<PlayerChoice>()
+				.expect("screwed up while parsing");
 
 			player.find_score(&opponent)
 		})
